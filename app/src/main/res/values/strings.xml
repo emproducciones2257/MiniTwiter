@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MiniTwiter</string>
+    <string name="hint_Email">Email</string>
+    <string name="hint_contraseña">Pasword</string>
+    <string name="btn_iniSecion">INICIAR SESION</string>
+    <string name="txtRegistrarSinCuenta">Si aún no tienes cuenta, registrate aquí.</string>
+    <string name="text_go_login">Si ya tenes cuenta, inicia sesion aqui</string>
+    <string name="btnSigUp">Registrarme</string>
+    <string name="hintUserName">Nombre de Usuario</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_prueba">prueba</string>
+    <string name="toolbar_titulo_home">inicio</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnTwittear">Twitt</string>
+    <string name="hitn_Twiit">Que esta pasando?</string>
+</resources>
