@@ -83,4 +83,38 @@ public class MiniTwiterRepository {
         });
     }
 
+    public void likeTweet(int idTweet){
+
+        Call<Tweet> call = authTwitterService.likeTweet(idTweet);
+
+        call.enqueue(new Callback<Tweet>() {
+            @Override
+            public void onResponse(Call<Tweet> call, Response<Tweet> response) {
+                if(response.isSuccessful()){
+                    List<Tweet> listClonada = new ArrayList<>();
+
+                    for (int i = 0; i<allTweet.getValue().size();i++){
+                        if(allTweet.getValue().get(i).getId()==idTweet){
+                            /*si se encuntra en la lista original el elmento sobre el que hemos
+                            echo like, introducimos el elemento que nos llego del servidor
+                            con el like
+                             */
+                            listClonada.add(response.body());
+                        }else {
+                            listClonada.add(new Tweet(allTweet.getValue().get(i)));
+                        }
+                    }
+                    allTweet.setValue(listClonada);
+                }else {
+                    Toast.makeText(MyApp.getContext(), "Algo Salio Mal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Tweet> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexion, intentelo nuevamente", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

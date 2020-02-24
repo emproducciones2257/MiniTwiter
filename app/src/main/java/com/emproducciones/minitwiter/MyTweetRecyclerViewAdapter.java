@@ -1,5 +1,7 @@
 package com.emproducciones.minitwiter;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -13,6 +15,8 @@ import com.emproducciones.minitwiter.Common.Constantes;
 import com.emproducciones.minitwiter.Common.SharedPreferencesManager;
 import com.emproducciones.minitwiter.Retrofit.Response.Like;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
+import com.emproducciones.minitwiter.data.MiniTweeterViewModel;
+
 import java.util.List;
 
 public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecyclerViewAdapter.ViewHolder> {
@@ -20,11 +24,13 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
     private List<Tweet> mValues;
     Context ctx;
     String usuario;
+    MiniTweeterViewModel miniTweeterViewModel;
 
     public MyTweetRecyclerViewAdapter(Context ctx, List<Tweet> items) {
         mValues = items;
         this.ctx=ctx;
         usuario = SharedPreferencesManager.getSomeStringValues(Constantes.PREF_USER);
+        miniTweeterViewModel = ViewModelProviders.of((FragmentActivity) ctx).get(MiniTweeterViewModel.class);
     }
 
     @Override
@@ -32,8 +38,6 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_tweet, parent, false);
         return new ViewHolder(view);
-
-        //te mando de aca para alla a ver si llega
     }
 
     @Override
@@ -58,6 +62,13 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
 
             holder.txtCountLikes.setTextColor(ctx.getResources().getColor(android.R.color.black));
             holder.txtCountLikes.setTypeface(null, Typeface.BOLD);
+
+            holder.imgLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    miniTweeterViewModel.likeTweet(holder.mItem.getId());
+                }
+            });
 
                 for(Like e : holder.mItem.getLikes()){
                     if(e.getUsername().equals(usuario)){

@@ -24,7 +24,16 @@ public class MiniTweeterViewModel extends AndroidViewModel {
 
     public LiveData<List<Tweet>> getListTweet(){ return listTweet;}
 
+    public LiveData<List<Tweet>> getNewTweet(){
+
+        return miniTwiterRepository.getAllTweet();
+    }
+
     public void insertarTweet(String mensaje){
         miniTwiterRepository.createTweet(mensaje);
+    }
+
+    public void likeTweet(int idTweet){
+        miniTwiterRepository.likeTweet(idTweet);
     }
 }
