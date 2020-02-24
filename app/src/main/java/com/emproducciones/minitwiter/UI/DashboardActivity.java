@@ -9,18 +9,16 @@ import com.emproducciones.minitwiter.Common.*;
 import com.emproducciones.minitwiter.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.AppBarConfiguration;
 
 public class DashboardActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
     ImageView imgToolbarPhoto;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private BottomNavigationView.OnNavigationItemSelectedListener appBarConfiguration
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -31,11 +29,14 @@ public class DashboardActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     f = TweetListFragment.newInstance(Constantes.TWEET_LIST_ALL);
+                    fab.show();
                     break;
                 case R.id.navigation_twit_like:
                     f = TweetListFragment.newInstance(Constantes.TWEET_LIST_FAV);
+                    fab.hide();
                     break;
                 case R.id.navigation_profile:
+                    fab.hide();
                     break;
             }
 
@@ -50,24 +51,20 @@ public class DashboardActivity extends AppCompatActivity {
         }
     };
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = findViewById(R.id.navView);
 
         fab = findViewById(R.id.fab);
         imgToolbarPhoto = findViewById(R.id.imgToolbarPhoto);
 
         getSupportActionBar().hide();
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_twit_like, R.id.navigation_profile)
-                .build();
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navView);
+        navigation.setOnNavigationItemSelectedListener(appBarConfiguration);
+
 
         getSupportFragmentManager().
                 beginTransaction().

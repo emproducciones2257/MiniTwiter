@@ -13,6 +13,7 @@ public class MiniTweeterViewModel extends AndroidViewModel {
 
     private MiniTwiterRepository miniTwiterRepository;
     private LiveData<List<Tweet>> listTweet;
+    private LiveData<List<Tweet>> favTweet;
 
 
     public MiniTweeterViewModel(@NonNull Application application) {
@@ -24,9 +25,19 @@ public class MiniTweeterViewModel extends AndroidViewModel {
 
     public LiveData<List<Tweet>> getListTweet(){ return listTweet;}
 
+    public LiveData<List<Tweet>> getFavTweet(){
+           favTweet = miniTwiterRepository.getFavTweet();
+        return favTweet;
+    }
+
     public LiveData<List<Tweet>> getNewTweet(){
 
         return miniTwiterRepository.getAllTweet();
+    }
+
+    public LiveData<List<Tweet>> getNewFavTweet(){
+        getNewTweet();
+        return getFavTweet();
     }
 
     public void insertarTweet(String mensaje){

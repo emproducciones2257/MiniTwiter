@@ -65,9 +65,9 @@ public class TweetListFragment extends Fragment {
                 public void onRefresh() {
                     swipeRefreshLayout.setRefreshing(true);
                     if(tweetListType==Constantes.TWEET_LIST_ALL){
-                        sentDataAdapter();
+                        loadTweetData();
                     }else if(tweetListType==Constantes.TWEET_LIST_FAV){
-                        sentDatNewFavAdapter();
+                        loadNewDatFav();
                     }
                 }
             });
@@ -80,29 +80,50 @@ public class TweetListFragment extends Fragment {
             recyclerView.setAdapter(myTweetRecyclerViewAdapter);
 
             if(tweetListType==Constantes.TWEET_LIST_ALL){
-                sentDataAdapter();
+                loadTweetData();
             }else if(tweetListType==Constantes.TWEET_LIST_FAV){
-                sentDatFavAdapter();
+                loadFavTweetData();
             }
 
-            sentDataAdapter();
+            loadTweetData();
 
         return view;
     }
 
-    private void sentDatNewFavAdapter() {
+    private void loadNewDatFav() {
+
+        miniTweeterViewModel.getNewTweet().observe(getActivity(), new Observer<List<Tweet>>() {
+            @Override
+            public void onChanged(List<Tweet> tweets) {
+                TweetList = tweets;
+                swipeRefreshLayout.setRefreshing(false);
+                myTweetRecyclerViewAdapter.sendData(TweetList);
+                miniTweeterViewModel.getNewFavTweet().removeObserver(this);
+            }
+        });
+
     }
 
-    private void sentDatFavAdapter() {
+    private void loadFavTweetData() {
+
+        miniTweeterViewModel.getFavTweet().observe(getActivity(), new Observer<List<Tweet>>() {
+            @Override
+            public void onChanged(List<Tweet> tweets) {
+                TweetList = tweets;
+                myTweetRecyclerViewAdapter.sendData(TweetList);
+            }
+        });
+
     }
 
-    private void sentDataAdapter() {
+    private void loadTweetData() {
 
         miniTweeterViewModel.getListTweet().observe(getActivity(), new Observer<List<Tweet>>() {
             @Override
             public void onChanged(List<Tweet> tweets) {
                TweetList = tweets;
                myTweetRecyclerViewAdapter.sendData(TweetList);
+               swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
