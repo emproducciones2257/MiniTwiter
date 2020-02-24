@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.*;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.*;
+
+import com.emproducciones.minitwiter.Common.Constantes;
 import com.emproducciones.minitwiter.MyTweetRecyclerViewAdapter;
 import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
@@ -16,8 +18,8 @@ import java.util.List;
 
 public class TweetListFragment extends Fragment {
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    private int mColumnCount = 1;
+
+    private int tweetListType = 1;
     RecyclerView recyclerView;
     MyTweetRecyclerViewAdapter myTweetRecyclerViewAdapter;
     List<Tweet> TweetList;
@@ -27,10 +29,10 @@ public class TweetListFragment extends Fragment {
     public TweetListFragment() {
     }
 
-    public static TweetListFragment newInstance(int columnCount) {
+    public static TweetListFragment newInstance(int tweetListType) {
         TweetListFragment fragment = new TweetListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(Constantes.TWEET_LIST_TYPE, tweetListType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,7 +44,7 @@ public class TweetListFragment extends Fragment {
                 .get(MiniTweeterViewModel.class);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            tweetListType = getArguments().getInt(Constantes.TWEET_LIST_TYPE);
         }
     }
 
@@ -61,24 +63,37 @@ public class TweetListFragment extends Fragment {
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    sentDataNewAdapter();
                     swipeRefreshLayout.setRefreshing(true);
+                    if(tweetListType==Constantes.TWEET_LIST_ALL){
+                        sentDataAdapter();
+                    }else if(tweetListType==Constantes.TWEET_LIST_FAV){
+                        sentDatNewFavAdapter();
+                    }
                 }
             });
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             myTweetRecyclerViewAdapter = new MyTweetRecyclerViewAdapter(
                     getActivity(),
                     TweetList);
             recyclerView.setAdapter(myTweetRecyclerViewAdapter);
 
+            if(tweetListType==Constantes.TWEET_LIST_ALL){
+                sentDataAdapter();
+            }else if(tweetListType==Constantes.TWEET_LIST_FAV){
+                sentDatFavAdapter();
+            }
+
             sentDataAdapter();
 
         return view;
+    }
+
+    private void sentDatNewFavAdapter() {
+    }
+
+    private void sentDatFavAdapter() {
     }
 
     private void sentDataAdapter() {

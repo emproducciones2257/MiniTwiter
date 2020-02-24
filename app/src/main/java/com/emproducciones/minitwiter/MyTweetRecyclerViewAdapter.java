@@ -16,7 +16,6 @@ import com.emproducciones.minitwiter.Common.SharedPreferencesManager;
 import com.emproducciones.minitwiter.Retrofit.Response.Like;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
 import com.emproducciones.minitwiter.data.MiniTweeterViewModel;
-
 import java.util.List;
 
 public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecyclerViewAdapter.ViewHolder> {
