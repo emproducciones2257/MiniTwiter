@@ -32,6 +32,8 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_tweet, parent, false);
         return new ViewHolder(view);
+
+        //te mando de aca para alla a ver si llega
     }
 
     @Override
