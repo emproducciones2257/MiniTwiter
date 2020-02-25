@@ -9,10 +9,10 @@ import com.emproducciones.minitwiter.Common.MyApp;
 import com.emproducciones.minitwiter.Common.SharedPreferencesManager;
 import com.emproducciones.minitwiter.Retrofit.AuthTwitterClient;
 import com.emproducciones.minitwiter.Retrofit.AuthTwitterService;
+import com.emproducciones.minitwiter.Retrofit.Response.DeleteTweet;
 import com.emproducciones.minitwiter.Retrofit.Response.Like;
 import com.emproducciones.minitwiter.Retrofit.Response.RequestCreateTweet;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -149,10 +149,35 @@ public class MiniTwiterRepository {
                 }
             }
         }
-
         favTweet.setValue(newFavList);
-
         return favTweet;
+    }
+
+    public void deleteTweet(int idTweetEliminar){
+        Call<DeleteTweet> call = authTwitterService.deleteTweet(idTweetEliminar);
+
+        call.enqueue(new Callback<DeleteTweet>() {
+            @Override
+            public void onResponse(Call<DeleteTweet> call, Response<DeleteTweet> response) {
+                if(response.isSuccessful()){
+                    List<Tweet> cloneTweet = new ArrayList<>();
+                    for (int i = 0; i<allTweet.getValue().size();i++){
+                        if(allTweet.getValue().get(i).getId()!=idTweetEliminar){
+                            cloneTweet.add(new Tweet(allTweet.getValue().get(i)));
+                        }
+                    }
+                    allTweet.setValue(cloneTweet);
+                    getFavTweet();
+                }else {
+                    Toast.makeText(MyApp.getContext(), "Algo salio mal", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeleteTweet> call, Throwable t) {
+                Toast.makeText(MyApp.getContext(), "Error en la conexion, intentelo nuevamente", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

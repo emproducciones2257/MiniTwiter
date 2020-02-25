@@ -101,7 +101,6 @@ public class TweetListFragment extends Fragment {
                 miniTweeterViewModel.getNewFavTweet().removeObserver(this);
             }
         });
-
     }
 
     private void loadFavTweetData() {
