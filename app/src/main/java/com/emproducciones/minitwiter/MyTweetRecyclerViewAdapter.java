@@ -62,6 +62,19 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
             holder.txtCountLikes.setTextColor(ctx.getResources().getColor(android.R.color.black));
             holder.txtCountLikes.setTypeface(null, Typeface.BOLD);
 
+            holder.imgShowMenu.setVisibility(View.GONE);
+
+            if(holder.mItem.getUser().getUsername().equals(usuario)){
+                holder.imgShowMenu.setVisibility(View.VISIBLE);
+            }
+
+            holder.imgShowMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    miniTweeterViewModel.openDialogMenu(ctx,holder.mItem.getId());
+                }
+            });
+
             holder.imgLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -77,7 +90,6 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
 
                             holder.txtCountLikes.setTextColor(ctx.getResources().getColor(R.color.pink));
                             holder.txtCountLikes.setTypeface(null, Typeface.BOLD);
-
                              break;
                         }
                 }
@@ -100,6 +112,7 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
         public final View mView;
         public final ImageView imageViewAvatar;
         public final ImageView imgLike;
+        public final ImageView imgShowMenu;
         public final TextView txtUserName;
         public final TextView txtMessage;
         public final TextView txtCountLikes;
@@ -110,6 +123,7 @@ public class MyTweetRecyclerViewAdapter extends RecyclerView.Adapter<MyTweetRecy
             mView = view;
             imageViewAvatar = view.findViewById(R.id.imageViewAvatar);
             imgLike = view.findViewById(R.id.imgLike);
+            imgShowMenu = view.findViewById(R.id.imgShowMenu);
             txtUserName = view.findViewById(R.id.txtUserName);
             txtMessage = view.findViewById(R.id.txtMessage);
             txtCountLikes = view.findViewById(R.id.txtCountLikes);

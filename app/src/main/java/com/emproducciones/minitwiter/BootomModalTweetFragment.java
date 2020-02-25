@@ -18,6 +18,7 @@ public class BootomModalTweetFragment extends BottomSheetDialogFragment {
         BootomModalTweetFragment fragment = new BootomModalTweetFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constantes.ARG_TWEET_DELETE,idTweet);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
