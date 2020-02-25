@@ -23,4 +23,7 @@ public class Constantes {
     public static final int TWEET_LIST_ALL=1;
     public static final int TWEET_LIST_FAV=2;
 
+
+    public static final String ARG_TWEET_DELETE = "ARG_TWEET_DELETE";
+
 }

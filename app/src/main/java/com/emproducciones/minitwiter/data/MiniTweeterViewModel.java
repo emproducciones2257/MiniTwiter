@@ -1,10 +1,14 @@
 package com.emproducciones.minitwiter.data;
 
 import android.app.Application;
+import android.content.Context;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.emproducciones.minitwiter.BootomModalTweetFragment;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
 
 import java.util.List;
@@ -24,6 +28,11 @@ public class MiniTweeterViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Tweet>> getListTweet(){ return listTweet;}
+
+    public void openDialogMenu(Context ctx, int idTeet){
+        BootomModalTweetFragment bootomModalTweetFragment =  BootomModalTweetFragment.newInstance(idTeet);
+        bootomModalTweetFragment.show(((AppCompatActivity)ctx).getSupportFragmentManager(),"bootomModalTweetFragment");
+    }
 
     public LiveData<List<Tweet>> getFavTweet(){
            favTweet = miniTwiterRepository.getFavTweet();

@@ -1,19 +1,23 @@
 package com.emproducciones.minitwiter.UI;
 
+
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.*;
 import androidx.recyclerview.widget.*;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.view.*;
 
 import com.emproducciones.minitwiter.Common.Constantes;
 import com.emproducciones.minitwiter.MyTweetRecyclerViewAdapter;
 import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
 import com.emproducciones.minitwiter.data.MiniTweeterViewModel;
+
 import java.util.List;
 
 public class TweetListFragment extends Fragment {
