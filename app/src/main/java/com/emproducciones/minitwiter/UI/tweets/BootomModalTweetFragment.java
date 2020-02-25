@@ -1,17 +1,20 @@
-package com.emproducciones.minitwiter;
+package com.emproducciones.minitwiter.UI.tweets;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.*;
 import com.emproducciones.minitwiter.Common.Constantes;
+import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.data.MiniTweeterViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class BootomModalTweetFragment extends BottomSheetDialogFragment {
 
-    private MiniTweeterViewModel MiniTweeterViewModel;
+    private MiniTweeterViewModel tweetViewModel;
     private int idTweetAEliminar;
 
     public static BootomModalTweetFragment newInstance(int idTweet) {
@@ -42,7 +45,7 @@ public class BootomModalTweetFragment extends BottomSheetDialogFragment {
                 int menuItem = item.getItemId();
 
                 if(menuItem == R.id.action_delete_tweet){
-                    MiniTweeterViewModel.deleteTweet(idTweetAEliminar);
+                    tweetViewModel.deleteTweet(idTweetAEliminar);
                     getDialog().dismiss();
                     return true;
                 }
@@ -51,5 +54,11 @@ public class BootomModalTweetFragment extends BottomSheetDialogFragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        tweetViewModel = ViewModelProviders.of(getActivity()).get(MiniTweeterViewModel.class);
     }
 }

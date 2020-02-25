@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.emproducciones.minitwiter.UI.ui.home.HomeFragment"
+        android:name="com.emproducciones.minitwiter.UI.auth.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_twit_like"
-        android:name="com.emproducciones.minitwiter.UI.ui.dashboard.DashboardFragment"
+        android:name="com.emproducciones.minitwiter.UI.auth.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.emproducciones.minitwiter.UI.ui.notifications.NotificationsFragment"
+        android:name="com.emproducciones.minitwiter.UI.auth.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

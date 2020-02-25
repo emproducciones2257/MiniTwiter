@@ -6,7 +6,7 @@
     android:name="com.emproducciones.minitwiter.TweetListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.TweetListFragment"
+    tools:context=".UI.tweets.TweetListFragment"
 >
 
     <androidx.recyclerview.widget.RecyclerView

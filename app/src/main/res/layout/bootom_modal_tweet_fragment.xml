@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BootomModalTweetFragment">
+    tools:context=".UI.tweets.BootomModalTweetFragment">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewBootonTweet"

@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import com.emproducciones.minitwiter.BootomModalTweetFragment;
+import com.emproducciones.minitwiter.UI.tweets.BootomModalTweetFragment;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
 import java.util.List;
 

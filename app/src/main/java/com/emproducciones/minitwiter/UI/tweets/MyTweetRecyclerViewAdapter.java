@@ -1,4 +1,4 @@
-package com.emproducciones.minitwiter;
+package com.emproducciones.minitwiter.UI.tweets;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.emproducciones.minitwiter.Common.Constantes;
 import com.emproducciones.minitwiter.Common.SharedPreferencesManager;
+import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.Retrofit.Response.Like;
 import com.emproducciones.minitwiter.Retrofit.Response.Tweet;
 import com.emproducciones.minitwiter.data.MiniTweeterViewModel;

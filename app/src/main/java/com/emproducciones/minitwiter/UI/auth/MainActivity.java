@@ -1,4 +1,4 @@
-package com.emproducciones.minitwiter.UI;
+package com.emproducciones.minitwiter.UI.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import com.emproducciones.minitwiter.Retrofit.MiniTwitterClient;
 import com.emproducciones.minitwiter.Retrofit.MiniTwitterService;
 import com.emproducciones.minitwiter.Retrofit.Request.Response.RequestLogin;
 import com.emproducciones.minitwiter.Retrofit.Response.ResponseAuth;
+import com.emproducciones.minitwiter.UI.DashboardActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         SharedPreferencesManager.setSomeStringValues(Constantes.PREF_PHOTO,response.body().getPhotoUrl());
                         SharedPreferencesManager.setSomeBooleanValues(Constantes.PREF_ACTIVE,response.body().getActive());
 
-                        Intent i = new Intent(MainActivity.this,DashboardActivity.class);
+                        Intent i = new Intent(MainActivity.this, DashboardActivity.class);
                         startActivity(i);
                         //destruyo actividad para no volver al login
                         finish();

@@ -1,4 +1,4 @@
-package com.emproducciones.minitwiter.UI;
+package com.emproducciones.minitwiter.UI.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,7 @@ import com.emproducciones.minitwiter.Retrofit.MiniTwitterClient;
 import com.emproducciones.minitwiter.Retrofit.MiniTwitterService;
 import com.emproducciones.minitwiter.Retrofit.Request.Response.RequestSingUp;
 import com.emproducciones.minitwiter.Retrofit.Response.ResponseAuth;
+import com.emproducciones.minitwiter.UI.DashboardActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -108,7 +109,7 @@ public class SingUpActivity extends AppCompatActivity implements View.OnClickLis
                         SharedPreferencesManager.setSomeBooleanValues(Constantes.PREF_ACTIVE,response.body().getActive());
 
 
-                        Intent i = new Intent(SingUpActivity.this,DashboardActivity.class);
+                        Intent i = new Intent(SingUpActivity.this, DashboardActivity.class);
                         startActivity(i);
                         Toast.makeText(SingUpActivity.this, nombre + " registrado correctamente", Toast.LENGTH_SHORT).show();
                         finish();

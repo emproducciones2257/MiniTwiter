@@ -1,4 +1,4 @@
-package com.emproducciones.minitwiter.UI;
+package com.emproducciones.minitwiter.UI.tweets;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

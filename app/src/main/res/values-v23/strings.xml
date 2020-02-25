@@ -2,4 +2,9 @@
 <resources>
     <string name="btnTwittear" translatable="false">Twittea</string>
     <string name="hitn_Twiit">Que esta pasando?</string>
+    <string name="hint_user_name_prodile">Usuario</string>
+    <string name="hint_email_profile">Email</string>
+    <string name="btn_guardar_profile">Guardar</string>
+    <string name="btn_cambio_pas_profile">Cambiar Contraseña</string>
+    <string name="edt_webSite_Profile">Web Site</string>
 </resources>

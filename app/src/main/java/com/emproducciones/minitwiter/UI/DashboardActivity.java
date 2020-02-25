@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.emproducciones.minitwiter.Common.*;
 import com.emproducciones.minitwiter.R;
+import com.emproducciones.minitwiter.UI.profile.profileUserFragment;
+import com.emproducciones.minitwiter.UI.tweets.NuevoTwitDialogFragment;
+import com.emproducciones.minitwiter.UI.tweets.TweetListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
@@ -36,6 +39,7 @@ public class DashboardActivity extends AppCompatActivity {
                     fab.hide();
                     break;
                 case R.id.navigation_profile:
+                    f = new profileUserFragment();
                     fab.hide();
                     break;
             }
