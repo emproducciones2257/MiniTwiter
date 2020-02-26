@@ -4,7 +4,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
 import com.emproducciones.minitwiter.Retrofit.Request.Response.RequestUserProfile;
 import com.emproducciones.minitwiter.Retrofit.Response.ResponseUserProfile;
 
@@ -22,6 +21,10 @@ public class ProfileUserViewModel extends AndroidViewModel {
 
     public void updateProfile(RequestUserProfile requestUserProfile){
         profileRepository.updateUser(requestUserProfile);
+    }
+
+    public void UploadPhoto(String urlPotho){
+        profileRepository.uploadPhoto(urlPotho);
     }
 
 }

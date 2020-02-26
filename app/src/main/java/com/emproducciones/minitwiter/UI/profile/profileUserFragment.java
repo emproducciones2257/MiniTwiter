@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.emproducciones.minitwiter.Common.Constantes;
 import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.Retrofit.Request.Response.RequestUserProfile;
@@ -90,6 +91,11 @@ public class profileUserFragment extends Fragment {
             }
         });
 
+        imgAvatarProfile.setOnClickListener(view1 -> {
+            //Invocar la seleccion de la fotografia
+
+        });
+
         //ViewModel
         profileUserViewModel.userProfileLiveData.observe(getActivity(), new Observer<ResponseUserProfile>() {
             @Override
@@ -100,19 +106,26 @@ public class profileUserFragment extends Fragment {
                 edtWebSite.setText(responseUserProfile.getWebsite());
                 edtInteres.setText(responseUserProfile.getDescripcion());
 
+                if(!responseUserProfile.getPhotoUrl().isEmpty()){
+                    Glide.with(getActivity()).
+                            load(Constantes.URL_IMAGENES + responseUserProfile.
+                                    getPhotoUrl()).
+                            dontAnimate().
+                            diskCacheStrategy(DiskCacheStrategy.NONE).
+                            skipMemoryCache(true).
+                            centerCrop().
+                            into(imgAvatarProfile);
+                }
                 if (!loagingData){
                     btnGuardarProfile.setEnabled(true);
                     Toast.makeText(getContext(), "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
 
                 }
-                if(!responseUserProfile.getPhotoUrl().isEmpty()){
-                    Glide.with(getActivity()).
-                            load(Constantes.URL_IMAGENES + responseUserProfile.
-                                    getPhotoUrl()).
-                            into(imgAvatarProfile);
-                }
             }
         });
         return view;
     }
+
+
+
 }

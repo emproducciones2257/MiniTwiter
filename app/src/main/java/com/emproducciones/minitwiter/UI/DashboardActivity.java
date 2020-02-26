@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.emproducciones.minitwiter.Common.*;
 import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.UI.profile.profileUserFragment;
@@ -89,6 +90,9 @@ public class DashboardActivity extends AppCompatActivity {
 
             Glide.with(this).
                     load(Constantes.URL_IMAGENES).
+                    dontAnimate().
+                    diskCacheStrategy(DiskCacheStrategy.NONE).
+                    skipMemoryCache(true).
                     into(imgToolbarPhoto);
         }
     }

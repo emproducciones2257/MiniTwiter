@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.*;
 import android.widget.*;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.emproducciones.minitwiter.Common.*;
 import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.data.MiniTweeterViewModel;
@@ -46,6 +47,10 @@ public class NuevoTwitDialogFragment extends DialogFragment implements View.OnCl
 
             Glide.with(getContext()).
                     load(Constantes.URL_IMAGENES).
+                    dontAnimate().
+                    diskCacheStrategy(DiskCacheStrategy.NONE).
+                    skipMemoryCache(true).
+                    centerCrop().
                     into(imgAvatar);
         }
         return view;
