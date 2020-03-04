@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.emproducciones.minitwiter.Common.*;
@@ -13,11 +15,17 @@ import com.emproducciones.minitwiter.UI.tweets.NuevoTwitDialogFragment;
 import com.emproducciones.minitwiter.UI.tweets.TweetListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements PermissionListener {
 
     FloatingActionButton fab;
     ImageView imgToolbarPhoto;
@@ -95,5 +103,20 @@ public class DashboardActivity extends AppCompatActivity {
                     skipMemoryCache(true).
                     into(imgToolbarPhoto);
         }
+    }
+
+    @Override
+    public void onPermissionGranted(PermissionGrantedResponse response) {
+        //Invocamos la seleccion de fotos de la galeria
+    }
+
+    @Override
+    public void onPermissionDenied(PermissionDeniedResponse response) {
+        Toast.makeText(this, "No se puede seleccionar la fotografia", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
     }
 }

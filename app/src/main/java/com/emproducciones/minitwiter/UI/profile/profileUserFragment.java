@@ -3,12 +3,11 @@ package com.emproducciones.minitwiter.UI.profile;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.emproducciones.minitwiter.Common.Constantes;
@@ -24,6 +22,10 @@ import com.emproducciones.minitwiter.R;
 import com.emproducciones.minitwiter.Retrofit.Request.Response.RequestUserProfile;
 import com.emproducciones.minitwiter.Retrofit.Response.ResponseUserProfile;
 import com.emproducciones.minitwiter.data.ProfileUserViewModel;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.listener.single.CompositePermissionListener;
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 public class profileUserFragment extends Fragment {
 
@@ -32,6 +34,7 @@ public class profileUserFragment extends Fragment {
     EditText txtUserNameProfile,txtEmailProfile,txtPaswordProfile,edtWebSite,edtInteres;
     Button btnGuardarProfile, btnCambiarPasword;
     Boolean loagingData = true;
+    PermissionListener allpermissionListener;
 
     public static profileUserFragment newInstance() {
         return new profileUserFragment();
@@ -93,6 +96,8 @@ public class profileUserFragment extends Fragment {
 
         imgAvatarProfile.setOnClickListener(view1 -> {
             //Invocar la seleccion de la fotografia
+            //Metodo de comprobacion de permisos
+            checkPermision();
 
         });
 
@@ -126,6 +131,18 @@ public class profileUserFragment extends Fragment {
         return view;
     }
 
+    private void checkPermision() {
+        PermissionListener dialogOnDeniedPermisionListener =
+                DialogOnDeniedPermissionListener.
+                        Builder.
+                        withContext(getContext()).
+                        withTitle("Permisos").
+                        withMessage("Los permisos son encesarios para la seleccion de fotografias").
+                        withButtonText("Aceptar").
+                        withIcon(R.mipmap.ic_launcher).
+                        build();
+        allpermissionListener = new CompositePermissionListener((PermissionListener) getActivity(),dialogOnDeniedPermisionListener);
 
-
+        Dexter.withActivity(getActivity()).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(allpermissionListener).check();
+    }
 }
